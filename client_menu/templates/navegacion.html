@@ -1,0 +1,189 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap -->
+  <link rel="title icon" type="image/gif" href="{% static 'client_menu/JazzLogo.gif' %}">
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{% static 'css/all.css' %}">
+  <!--
+    fa-user-secret
+    fa-fingerprint
+  -->
+  <!-- Custom -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <!-- Lightbox -->
+  <link rel="stylesheet" href="{% static 'css/lightbox.min.css' %}">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="{% static 'css/select2.min.css' %}">
+  <!-- Datatable -->
+  <link rel="stylesheet" href="{% static 'css/dataTables.bootstrap4.min.css' %}">
+  <!-- XDSoft Datetimepicker -->
+  <link rel="stylesheet" href="{% static 'css/jquery.datetimepicker.min.css' %}">
+  <!-- JQuery-comfirm -->
+  <link rel="stylesheet" href="{% static 'css/jquery-confirm.min.css' %}">
+  <!--  Titulo -->
+  <title>Templete {% block title %}{% endblock title %}</title>
+
+</head>
+
+<body>
+
+  <nav class="navbar navbar-dark bg-black fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'home_view' %}">
+        <img src="{% static 'client_menu/jazzlogo.gif' %}" width="30" height="30" class="d-inline-block align-top">
+          <span class="badge bg-info position-absolute top-50 start-50 translate-middle">Datos de Clientes</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar"
+        aria-controls="offcanvasDarkNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
+        aria-labelledby="offcanvasDarkNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menu Principal</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+            aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Clientes
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark">
+                <li><a class="dropdown-item" href="{% url 'client_data_listar' %}"><i class="fas fa-truck-monster"></i> Listar Clientes</a></li>
+                <li><a class="dropdown-item" href="{% url 'client_data_crear' %}"><i class="fas fa-file-signature"></i> Anotar Clientes</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Reportes
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark">
+                <li><a class="dropdown-item" href=""><i class="fas fa-chart-line"></i> Reporte 1</a></li>
+                <li><a class="dropdown-item" href="#"><i class="fas fa-file-pdf"></i> Reporte 2</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Hojas de Calculo
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark">
+                <li><a class="dropdown-item" href=""><i class="fas fa-file-excel"></i> Guias Elaboradas por Periodo</a></li>
+                <li><a class="dropdown-item" href="#"><i class="fas fa-calculator"></i> Guias Recibidas entre Fechas</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Envio de Correos
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark">
+                <li><a class="dropdown-item" href="#"><i class="fas fa-envelope"></i> Correo 1</a></li>
+                <li><a class="dropdown-item" href="#"><i class="fas fa-envelope-open"></i> Correo 2</a></li>
+              </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Usuarios
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark">
+                <li><a class="dropdown-item" href=""><i class="fas fa-user-plus"></i> Usuarios de la Aplicacion</a></li>
+              </ul>
+            </li>
+
+            <li class="nav-item">
+              <a href="{% url 'logout' %}" class="nav-link">
+                <i class="fas fa-sign-out-alt"></i>Salir
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <!--  Contenido -->
+  <section class="pt-5 bg-black">
+    <div class="container-fluid">
+      <!-- Titulo -->
+      <div class="row">
+        <div class="col text-center mb-0">
+          <h3 class="text-info display-4">
+            {% block titulo %}
+            {% endblock titulo %}
+          </h3>
+
+        </div>
+
+      </div>
+      <!-- Fin de Titulo -->
+
+    </div>
+
+  </section>
+<!--  
+  <div class="col-md-6 mx-auto my-2">
+    <h2>----------</h2>
+  </div>
+ -->
+  <!--  Fin de Contenido -->
+  
+  <!--  Main Content -->
+  {% block content %}
+  {% endblock content %}
+    <!-- Footer -->
+    <footer class="bg-black">
+      <div class="container">
+        <div class="row">
+          <div class="col text-center">
+            <p class="text-light py-3 m-0">&copy;<span class="year"></span> Derechos de Autor - Datos de Clientes</p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </footer>
+    <!-- End of Footer -->
+    <!-- Footer
+    <footer id="main-footer" class="py-3 text-white text-center" style="background-color: rgb(0,0,0)">
+      Derechos de Autor &copy;
+      <span class="year"></span> Controles MD
+    </footer>
+   -->
+  <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+  <script src="{% static 'js/jquery-3.3.1.min.js' %} "></script>
+  <script src="{% static 'js/lightbox.min.js' %} "></script>
+  <script src="{% static 'js/select2.min.js' %} "></script>
+  <script src="{% static 'js/jquery.dataTables.min.js' %} "></script>
+  <script src="{% static 'js/dataTables.bootstrap4.min.js' %} "></script>
+  <script src="{% static 'js/jquery.datetimepicker.full.min.js' %} "></script>
+  <script src="{% static 'js/jquery-confirm.min.js' %} "></script>
+  <script src="{% static 'js/main.js' %} "></script>
+  {% block js_page %}
+  <script>
+    $(document).ready(function () {
+      jQuery.datetimepicker.setLocale('es');
+    });
+  </script>
+
+  {% endblock js_page %}
+
+
+</body>
+
+</html>

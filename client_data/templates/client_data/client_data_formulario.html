@@ -1,0 +1,90 @@
+{% extends 'navegacion.html' %}
+{% block title %} | client_data_formulario {% endblock %}
+{% block titulo %}
+Formulario para anotar/editar Clientes
+{% endblock titulo %}
+{% block content %}
+<!-- Alerts -->
+{% include 'alerts.html' %}
+
+<form method="POST" id="frmClient_Data" class="form-inline">
+  {% csrf_token %}
+  {% if user.is_authenticated %}
+    <input type="hidden" name="origen" value="{{ origen }}">
+  {% else %}
+    <input type="hidden" name="origen" value="0">
+  {% endif %}
+  <div class="col-xl-12 col-md-12 mb-12">
+    {% if movies %}
+    <div class="card border-left-warning shadow h-100 py-2">
+    {% else %}
+    <div class="card border-left-success shadow h-100 py-2">
+    {% endif %}
+      <div class="card-body">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+              {% if movies %} <h3>Editar {% else %} <h3>Nuevo {% endif %} Cliente</h3>
+            </div>
+            <div class="dropdown-divider"></div>
+            <div class="row">
+              <div class="col-2">Nombre</div>
+              <div class="col-8">
+                <div class="input-group">
+                  {{ form.nombre }}
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-2">Nit</div>
+              <div class="col-8">
+                <div class="input-group">
+                  {{ form.nit }}
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-2">Email</div>
+              <div class="col-8">
+                <div class="input-group">
+                  {{ form.email }}
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-2">Direccion</div>
+              <div class="col-8">
+                <div class="input-group">
+                  {{ form.direccion }}
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-2">Telefono</div>
+              <div class="col-8">
+                <div class="input-group">
+                  {{ form.telefono }}
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="dropdown-divider"></div>
+              <div class="row">
+                <div class="col">
+                  <button type="submit" class="btn btn-danger"><span class="fa fa-save"></span> Guardar</button>
+                  <a href="{% url 'client_data_listar' %}" class="btn btn-success"><span class="fa fa-undo"></span>Cancelar</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</form>
+{% endblock %}
+{% block js_page %}
+{% endblock js_page %} 

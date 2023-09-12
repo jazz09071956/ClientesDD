@@ -1,0 +1,20 @@
+{% extends 'navegacion.html' %}
+
+<!-- 
+      <img src="portada.jpg" alt="">
+
+-->
+
+{% load static %}
+{% block title %} | Portada {% endblock title %}
+
+
+{%  block content %}
+
+  <!-- Portada -->
+  <section id="portada">
+    <!-- Page Heading -->
+    <img src="{% static 'client_menu/portada.jpg' %}" width="1800" height="900" class="d-inline-block align-top">
+  </section>
+
+{% endblock content %}
