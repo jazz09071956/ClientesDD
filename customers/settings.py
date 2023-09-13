@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-d*^k1f65psur!gblg2aqex=@m8_fw9x5m68(u668oz5oojffm0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'customers.wsgi.application'
 #    }
 #}
 
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -94,6 +94,17 @@ DATABASES = {
         'PASSWORD': 'Tiendas2023*',
         'HOST': 'localhost',
         'PORT': '',
+    }
+}
+"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'client_data_db',
+        'USER': 'Tiendas',
+        'PASSWORD': 'Tiendas2023*',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 

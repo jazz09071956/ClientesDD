@@ -13,7 +13,7 @@ class TablaBase(models.Model):
   creo = UserForeignKey(auto_user_add=True,related_name='+')
   modifico = UserForeignKey(auto_user=True,related_name='+')
 
-# para que no lo tome en cuenta a la hora de una migracion
+# para que no la tome en cuenta a la hora de una migracion
   class Meta:
     abstract=True
 
