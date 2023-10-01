@@ -1,0 +1,72 @@
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    {% if clientes %}
+    <form method="POST" role="form" class="form-inline" action="{% url 'client_data_editar' clientes.pk %}">
+      {% else %}
+      <form method="POST" role="form" class="form-inline" action="{% url 'client_data_nuevo' %}">
+        {% endif %}
+        <div class="col-xl-12 col-md-12 mb-12">
+          {% if clientes %}
+          <div class="card border-left-warning shadow h-100 py-2">
+            {% else %}
+            <div class="card border-left-success shadow h-100 py-2">
+              {% endif %}
+
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{% if clientes %} Editar
+                      {% else %} Nuevo {% endif %} Cliente</div>
+                    <div class="dropdown-divider"></div>
+                    {% csrf_token %}
+                    <div class="row">
+                      {{ form.as_p }}
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="row">
+                      <div class="col">
+                        <button type="submit" class="btn btn-danger"><span class="fa fa-save"></span>Guardar</button>
+                        <button type="button" class="btn btn-success" onclick="return cerrar_modal()">Cancelar</button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </form>
+  </div>
+</div>
+<script>
+  $(function () {
+
+    var url = $("form").attr("action");
+    //en django se necesita el token de seguridad, con f12 abrimos la ventana de desarrollador, luego en network al abrir el formulario de nuevo cliente si damos click en la respuesta podemos ver el preview del formulario y en response el codigo del mismo de alli podemos tomar el nombre del token
+    var token = jQuery("[name=csrfmiddlewaretoken]").val();
+
+    $("form").submit(function (e) {
+      //prevenir el envio del formulario en caso de error, por ejemplo al agregar un cliente duplicado
+      e.preventDefault();
+      // alert(url);
+      // alert(token);
+      var formData = $("form").serializeArray();
+      // console.log(formData);
+      $.ajax({
+          url: url,
+          method: "POST",
+          headers: {'X-CSRFToken': token},
+          data: formData
+        })
+        .done(function (r, textStatus, xhr) {
+          if (xhr.status = 200) {
+            location.reload(true);
+          } else {
+            mensaje(textStatus);
+          }
+        }).fail(function (error) {
+          mensaje(error.responseText);
+        });
+    });
+  });
+</script>

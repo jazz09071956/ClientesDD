@@ -1,4 +1,4 @@
 django
 django_userforeignkey
-psycopg2
 mysqlclient
+xlsxwriter

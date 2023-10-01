@@ -1,0 +1,18 @@
+tratar de incluir un link hacia las ventas desde la pantalla de clientes
+en el models.py se especifica blank=True si se desea evitar los mensajes automaticos del navegador
+tratar de empujar archivos a otras maquinas
+para importar datos se crea la carpeta management dentro de la aplicacion y dentro de ella otra carpeta commands que contiene los programas.py que se ejecutan desde la linea de comandos con manage.py
+tambien desde alli se pueden crear los permisos personalizados vease la aplicacion accounts de l proyecyo NavSecured
+la imagen de fondo se especifica en Style.css
+poner busqueda de giros de negocio
+averiguar porque se cambia el charset de Excel
+duplicado venta al por menor de productos lacteos
+cuando da error en la migracion: python manage.py migrate --fake
+es necesario usar el dropdownParent cuando el select2 esta en una ventada modal
+o alternativamente antes de inicializar cualquiera de las modales 
+$.fn.modal.Constructor.prototype._enforceFocus = function(){}
+
+el favicon se especifica en el tag <head> agregando esta linea a navegacion.html
+<link rel="icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+
+

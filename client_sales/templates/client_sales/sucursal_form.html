@@ -1,0 +1,71 @@
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    {% if sucursales %}
+    <form method="POST" role="form" class="form-inline" action="{% url 'sucursal_editar' sucursales.pk %}">
+      {% else %}
+      <form method="POST" role="form" class="form-inline" action="{% url 'sucursal_nuevo' %}">
+        {% endif %}
+        <div class="col-xl-12 col-md-12 mb-12">
+          {% if sucursales %}
+          <div class="card border-left-warning shadow h-100 py-2">
+            {% else %}
+            <div class="card border-left-success shadow h-100 py-2">
+              {% endif %}
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{% if sucursales %} Editar
+                      {% else %} Nueva {% endif %} Sucursal</div>
+                    <div class="dropdown-divider"></div>
+                    {% csrf_token %}
+                    <div class="row">
+                      {{ form.as_p }}
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="row">
+                      <div class="col">
+                        <button type="submit" class="btn btn-danger"><span class="fa fa-save"></span>Guardar</button>
+                        <button type="button" class="btn btn-success" onclick="return cerrar_modal()">Cancelar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </form>
+  </div>
+</div>
+<script>
+    /*Validar Envío de formulario */
+    $("form").submit(function (e) {
+
+      /* Inicio Validar Nombre Sucursal */
+      var nombre_sucursal = $("#id_nombre_sucursal").val();
+      if (nombre_sucursal.trim() == "") {
+        e.preventDefault()
+        $.alert({
+          type: 'red',
+          title: '',
+          content: 'Debe Especificar el Nombre de la Sucursal'
+        });
+        return false;
+      }
+      /* Final Validar Nombre Sucursal */
+      /* Inicio Validar Codigo de Sucursal */
+      var codigo_sucursal = $("#id_codigo_sucursal").val();
+      if (codigo_sucursal.trim() == "") {
+        e.preventDefault()
+        $.alert({
+          type: 'red',
+          title: '',
+          content: 'Debe Especificar el Codigo de la Sucursal'
+        });
+        return false;
+      }
+      /* Fin Validar Codigo de Sucursal */
+    });
+    /*Fin Validar Envío de Formulario */
+
+</script>
+

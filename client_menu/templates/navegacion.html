@@ -38,8 +38,8 @@
   <nav class="navbar navbar-dark bg-black fixed-top">
     <div class="container-fluid">
       <a class="navbar-brand" href="{% url 'home_view' %}">
-        <img src="{% static 'client_menu/jazzlogo.gif' %}" width="30" height="30" class="d-inline-block align-top">
-          <span class="badge bg-info position-absolute top-50 start-50 translate-middle">Datos de Clientes</span>
+        <img src="{% static 'client_menu/JazzLogo.gif' %}" width="30" height="30" class="d-inline-block align-top">
+          <span class="badge bg-info position-absolute top-50 start-50 translate-middle">Clientes</span>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar"
         aria-controls="offcanvasDarkNavbar">
@@ -60,8 +60,35 @@
                 Clientes
               </a>
               <ul class="dropdown-menu dropdown-menu-dark">
-                <li><a class="dropdown-item" href="{% url 'client_data_listar' %}"><i class="fas fa-truck-monster"></i> Listar Clientes</a></li>
-                <li><a class="dropdown-item" href="{% url 'client_data_crear' %}"><i class="fas fa-file-signature"></i> Anotar Clientes</a></li>
+                <li><a class="dropdown-item" href="{% url 'client_data_listado' %}"><i class="fas fa-file-signature"></i> Clientes</a></li>
+                <li><a class="dropdown-item" href="{% url 'client_data_to_excel_1' %}"><i class="fas fa-file-pdf"></i> Exportar Datos de Clientes a Excel</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Ventas a Clientes
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark">
+                <li><a class="dropdown-item" href="{% url 'client_sales_listado' %}"><i class="fas fa-chart-line"></i> Ventas a Clientes</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Sucursales
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark">
+                <li><a class="dropdown-item" href="{% url 'sucursal_listado' %}"><i class="fas fa-chart-line"></i> Sucursales</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Giros de Negocio
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark">
+                <li><a class="dropdown-item" href="{% url 'giro_negocio_listado' %}"><i class="fas fa-chart-line"></i> Giros de Negocio</a></li>
               </ul>
             </li>
             <li class="nav-item dropdown">
@@ -72,6 +99,7 @@
               <ul class="dropdown-menu dropdown-menu-dark">
                 <li><a class="dropdown-item" href=""><i class="fas fa-chart-line"></i> Reporte 1</a></li>
                 <li><a class="dropdown-item" href="#"><i class="fas fa-file-pdf"></i> Reporte 2</a></li>
+                <li><a class="dropdown-item" href="#"><i class="fas fa-truck-monster"></i> Reporte 3</a></li>
               </ul>
             </li>
             <li class="nav-item dropdown">
@@ -165,6 +193,9 @@
       <span class="year"></span> Controles MD
     </footer>
    -->
+   
+  <div class="modal fade" id="popup"></div>
+
   <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
   <script src="{% static 'js/jquery-3.3.1.min.js' %} "></script>
   <script src="{% static 'js/lightbox.min.js' %} "></script>
@@ -182,6 +213,46 @@
   </script>
 
   {% endblock js_page %}
+  
+  {% block control_modal %}
+  <script>
+  function abrir_modal(url){
+      $("#popup").load(url, function(){
+        $(this).modal({
+          backdrop:'static',
+          keyboard: false
+
+        })
+        $(this).modal('show');
+
+      });
+      return false;
+    }
+
+    function cerrar_modal(){
+      $('#popup').modal('hide');
+      return false;
+    }
+    function mensaje(msg, color='green')
+    {
+      if (color=="success")
+      {
+        color="green";
+      }
+      
+      if (color=="error")
+      {
+        color="red";
+      }
+        $.alert({
+        title:'',
+        theme:'material',
+        type:color,
+        content:msg
+      });
+    }
+  </script>
+  {% endblock %}
 
 
 </body>

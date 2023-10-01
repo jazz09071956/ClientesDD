@@ -1,0 +1,71 @@
+<div class="modal-dialog modal-lg">t_data
+  <div class="modal-content">
+    {% if giros_negocio %}
+    <form method="POST" role="form" class="form-inline" action="{% url 'giro_negocio_editar' giros_negocio.pk %}">
+      {% else %}
+      <form method="POST" role="form" class="form-inline" action="{% url 'giro_negocio_nuevo' %}">
+        {% endif %}
+        <div class="col-xl-12 col-md-12 mb-12">
+          {% if giros_negocio %}
+          <div class="card border-left-warning shadow h-100 py-2">
+            {% else %}
+            <div class="card border-left-success shadow h-100 py-2">
+              {% endif %}
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{% if giros_negocio %} Editar
+                      {% else %} Nuevo {% endif %} Giro de Negocio</div>
+                    <div class="dropdown-divider"></div>
+                    {% csrf_token %}
+                    <div class="row">
+                      {{ form.as_p }}
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="row">
+                      <div class="col">
+                        <button type="submit" class="btn btn-danger"><span class="fa fa-save"></span>Guardar</button>
+                        <button type="button" class="btn btn-success" onclick="return cerrar_modal()">Cancelar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </form>
+  </div>
+</div>
+<script>
+    /*Validar Envío de formulario */
+    $("form").submit(function (e) {
+
+      /* Inicio Validar Nombre Giro de Negocio */
+      var nombre_giro_negocio = $("#id_nombre_giro_negocio").val();
+      if (nombre_giro_negocio.trim() == "") {
+        e.preventDefault()
+        $.alert({
+          type: 'red',
+          title: '',
+          content: 'Debe Especificar el Nombre del Giro de Negocio'
+        });
+        return false;
+      }
+      /* Final Validar Nombre Giro de Negocio */
+      /* Inicio Validar Codigo de Giro de Negocio */
+      var codigo_giro_negocio = $("#id_codigo_giro_negocio").val();
+      if (codigo_giro_negocio.trim() == "") {
+        e.preventDefault()
+        $.alert({
+          type: 'red',
+          title: '',
+          content: 'Debe Especificar el Codigo del Giro de Negocio'
+        });
+        return false;
+      }
+      /* Fin Validar Codigo de Giro de Negocio */
+    });
+    /*Fin Validar Envío de Formulario */
+
+</script>
+

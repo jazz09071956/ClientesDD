@@ -32,7 +32,7 @@ Listado de Clientes
             <td>{{ cliente.direccion }}</td>
             <td>{{ cliente.telefono }}</td>
             <td>
-              <a href="{% url 'client_data_editar' cliente.id %}" class="btn btn-warning btn-circle" role="button"><i
+              <a href="{% url 'client_data_edit' cliente.id %}" class="btn btn-warning btn-circle" role="button"><i
                   class="far fa-edit"></i></a>
               <a href="{% url 'client_data_eliminar' cliente.id %}" class="btn btn-danger btn-circle" role="button"><i
                   class="far fa-trash-alt"></i></a>

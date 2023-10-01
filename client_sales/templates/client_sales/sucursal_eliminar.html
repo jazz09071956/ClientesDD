@@ -1,0 +1,28 @@
+{% extends 'navegacion.html' %}
+{% block title %} | sucursal_eliminar {% endblock %}
+{% block titulo %}
+Formulario para Eliminar Sucursales
+{% endblock titulo %}
+{% block content %}
+<form method="POST" id="frmclient_sales_eliminar" class="form-inline">
+  {% csrf_token %}
+  <div class="card my-5 mx-5">
+    <div class="card border-danger shadow h-100 py-2">
+      <div class="card-body">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Esta seguro de eliminar Sucursal: {{sucursales.codigo_sucursal}} - {{sucursales.nombre_sucursal}} ?</div>
+            <button type="submit" class="btn btn-danger"><i class="far fa-question-circle"></i>Eliminar</button>
+            <a href="{% url 'sucursal_listado' %}" class="btn btn-success"><span class="fa fa-undo"></span>Cancelar</a>
+          </div>
+          <div class="col-auto">
+            <i class="far fa-question-circle fa-2x text-gray-300"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+{% endblock %}
+{% block js_page %}
+{% endblock js_page %} 

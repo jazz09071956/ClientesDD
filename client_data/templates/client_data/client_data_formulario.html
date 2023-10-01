@@ -15,7 +15,7 @@ Formulario para anotar/editar Clientes
     <input type="hidden" name="origen" value="0">
   {% endif %}
   <div class="col-xl-12 col-md-12 mb-12">
-    {% if movies %}
+    {% if clientes %}
     <div class="card border-left-warning shadow h-100 py-2">
     {% else %}
     <div class="card border-left-success shadow h-100 py-2">
@@ -24,7 +24,7 @@ Formulario para anotar/editar Clientes
         <div class="row no-gutters align-items-center">
           <div class="col mr-2">
             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-              {% if movies %} <h3>Editar {% else %} <h3>Nuevo {% endif %} Cliente</h3>
+              {% if clientes %} <h3>Editar {% else %} <h3>Nuevo {% endif %} Cliente</h3>
             </div>
             <div class="dropdown-divider"></div>
             <div class="row">
@@ -37,7 +37,7 @@ Formulario para anotar/editar Clientes
             </div>
             <br>
             <div class="row">
-              <div class="col-2">Nit</div>
+              <div class="col-2">Nit o Dui</div>
               <div class="col-8">
                 <div class="input-group">
                   {{ form.nit }}

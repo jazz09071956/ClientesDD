@@ -1,0 +1,115 @@
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    {% if ventas_a_clientes %}
+    <form method="POST" role="form" class="form-inline" action="{% url 'client_sales_editar' ventas_a_clientes.pk %}">
+      {% else %}
+      <form method="POST" role="form" class="form-inline" action="{% url 'client_sales_nuevo' %}">
+        {% endif %}
+        <div class="col-xl-12 col-md-12 mb-12">
+          {% if ventas_a_clientes %}
+          <div class="card border-left-warning shadow h-100 py-2">
+            {% else %}
+            <div class="card border-left-success shadow h-100 py-2">
+              {% endif %}
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{% if ventas_a_clientes %} Editar
+                      {% else %} Nueva {% endif %} Venta a Cliente</div>
+                    <div class="dropdown-divider"></div>
+                    {% csrf_token %}
+                    <div class="row">
+                      {{ form.as_p }}
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="row">
+                      <div class="col">
+                        <button type="submit" class="btn btn-danger"><span class="fa fa-save"></span>Guardar</button>
+                        <button type="button" class="btn btn-success" onclick="return cerrar_modal()">Cancelar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </form>
+  </div>
+</div>
+<script>
+  $(function () {
+      /* control de fecha */
+      jQuery.datetimepicker.setLocale('es');
+      $('#id_fecha_venta').datetimepicker({
+        i18n:{
+          es:{
+            months:[
+              'Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto',
+              'Septiembre','Octubre','Noviembre','Diciembre',
+            ],
+            dayOfWeek:[
+              'Dom','Lum','Mar','Mie','Jue','Vie','Sab',
+            ]
+          }
+        },
+        format: "Y-m-d",
+        timepicker: false
+      });
+      /* control de fecha */
+    });
+    /*Validar Envío de formulario */
+    $("form").submit(function (e) {
+
+      /* Inicio Validar Sucursal */
+      var sucursal_venta = $("#id_sucursal_venta").val();
+      if (sucursal_venta.trim() == "") {
+        e.preventDefault()
+        $.alert({
+          type: 'red',
+          title: '',
+          content: 'Debe Especificar la Sucursal'
+        });
+        return false;
+      }
+      /* Final Validar Sucursal */
+      /* Inicio Validar Cliente */
+      var cliente_venta = $("#id_cliente_venta").val();
+      if (cliente_venta.trim() == "") {
+        e.preventDefault()
+        $.alert({
+          type: 'red',
+          title: '',
+          content: 'Debe Especificar el Cliente'
+        });
+        return false;
+      }
+      /* Fin Validar Cliente */
+      /* Inicio Validar el documento */
+      var documento_venta = $("#id_documento_venta").val();
+      if (documento_venta == "") {
+        e.preventDefault()
+        $.alert({
+          type: 'red',
+          title: '',
+          content: 'Debe especificar el documento de Venta'
+        });
+        return false;
+      }
+      /* Fin Validar el documento */
+      /* Inicio Validar el total de la venta */
+      var total_venta = $("#id_total_venta").val();
+      if (total_venta <= 0) {
+        e.preventDefault()
+        $.alert({
+          type: 'red',
+          title: '',
+          content: 'Debe especificar el Total de la Venta'
+        });
+        return false;
+      }
+      /* Fin Validar el total de la venta */
+    });
+    /*Fin Validar Envío de Formulario */
+
+</script>
+
