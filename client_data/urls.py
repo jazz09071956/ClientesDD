@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from client_data import views
-from .views import Client_Data_List, Client_Data_New, Client_Data_Nuevo, Client_Data_Edit, Client_Data_Editar, Client_Data_Delete, Client_Data_Eliminar, Giro_Negocio_List, Giro_Negocio_Nuevo, Giro_Negocio_Editar, Giro_Negocio_Eliminar, Client_Data_To_Excel_1, Client_Data_To_Excel_2
+from .views import Client_Data_List, Client_Data_New, Client_Data_Nuevo, Client_Data_Edit, Client_Data_Editar, Client_Data_Delete, Client_Data_Eliminar, Giro_Negocio_List, Giro_Negocio_Nuevo, Giro_Negocio_Editar, Giro_Negocio_Eliminar, Client_Data_To_Excel_1, Client_Data_To_Excel_2, Giro_Negocio_To_Excel_1, Giro_Negocio_To_Excel_2
 from .views import clientes
 
 #JJ 
@@ -20,4 +20,6 @@ urlpatterns =[
     path('giro_negocio/nuevo', Giro_Negocio_Nuevo.as_view(), name='giro_negocio_nuevo'),
     path('giro_negocio/editar/<int:pk>', Giro_Negocio_Editar.as_view(), name='giro_negocio_editar'),
     path('giro_negocio/eliminar/<int:pk>', Giro_Negocio_Eliminar.as_view(), name='giro_negocio_eliminar'),
+    path('giro_negocio/giro_negocio_to_excel_1', Giro_Negocio_To_Excel_1, name='giro_negocio_to_excel_1'),
+    path('giro_negocio/giro_negocio_to_excel_2', Giro_Negocio_To_Excel_2, name='giro_negocio_to_excel_2'),
 ]

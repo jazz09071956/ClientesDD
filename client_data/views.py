@@ -225,7 +225,7 @@ class Client_Data_To_Pdf(generic.DeleteView):
 
 def Client_Data_To_Excel_1(request):
     context = {
-        'archivo': 'HojaVenta',
+        'archivo': 'DatosCleiente',
     }
 
     return render(request, 'client_data/client_data_to_excel_1.html', {'context': context})
@@ -283,7 +283,7 @@ def Client_Data_To_Excel_2(request):
 
     # Escribir los encabezados de la hoja de trabajo (linea 1)
     worksheet.write(0,0,'Nombre')
-    worksheet.write(0,1,'Tipo_documento')
+    worksheet.write(0,1,'Tipo de documento')
     worksheet.write(0,2,'Documento de Identidad')
     worksheet.write(0,3,'Correo Electronico')
     worksheet.write(0,4,'Direccion')
@@ -317,3 +317,59 @@ def Client_Data_To_Excel_2(request):
     #return HttpResponseRedirect('/client_data/')
 
     #return render(request, 'client_data/client_data_listado.html')
+
+
+def Giro_Negocio_To_Excel_1(request):
+    context = {
+        'archivo': 'GirosNegocio',
+    }
+
+    return render(request, 'client_data/giro_negocio_to_excel_1.html', {'context': context})
+
+
+def Giro_Negocio_To_Excel_2(request):
+
+    queryset_list = Giro_Negocio.objects.values('nombre_giro_negocio','codigo_giro_negocio')
+    #contenido del campo archivo
+    if 'archivo' in request.GET:
+        archivo = request.GET['archivo']
+
+    # Crear un objeto (object) para crear archivos en memoria
+    temp_file = BytesIO()
+
+    # Empezar un libro (workbook)
+    workbook = xlsxwriter.Workbook(temp_file)
+    worksheet = workbook.add_worksheet()
+    
+    # Prepararar los datos a escribirse
+    data = []
+    for giro_negocio in queryset_list:
+        nombre_giro_negocio=giro_negocio['nombre_giro_negocio']
+        codigo_giro_negocio=giro_negocio['codigo_giro_negocio']
+
+        data.append([codigo_giro_negocio, nombre_giro_negocio])
+
+
+    # Escribir los encabezados de la hoja de trabajo (linea 1)
+    worksheet.write(0,0,'Codigo Giro de Negocio')
+    worksheet.write(0,1,'Nombre Giro de Negocio')
+
+    n=1 # lineas de encabezado
+
+    # Escribir datos a la hoja de trabajo (worksheet)
+    for row in range(len(data)):
+        for col in range(len(data[row])):
+            worksheet.write(row + n, col, data[row][col])
+
+    # Cerrar el libro (workbook)
+    workbook.close()
+
+    # Capturar datos desde el archivo de memoria
+    data_to_download = temp_file.getvalue()
+
+    # Preparar la respuesta para descarga (download)
+    response = HttpResponse(content_type='application/vnd.ms-excel')
+    response['Content-Disposition'] = 'attachment; filename='+archivo+'.xlsx'
+    response.write(data_to_download)
+
+    return response
